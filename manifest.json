@@ -1,0 +1,32 @@
+{
+    "theme_color": "#ff0000",
+    "background_color": "#ffffff",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "/",
+    "app_name": "NumTrack",
+    "short_name": "NumTrack",
+    "description": "NumTrack ist eine moderne Counter-Tracking-App, mit der Sie mühelos Counter erstellen und anpassen können. Erhöhen oder verringern Sie die Counter ganz einfach.",
+    "icons": [
+        {
+            "src": "/assets/icons/192.png",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/icons/256.png",
+            "sizes": "256x256",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/icons/384.png",
+            "sizes": "384x384",
+            "type": "image/png"
+        },
+        {
+            "src": "/assets/icons/512.png",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ]
+}

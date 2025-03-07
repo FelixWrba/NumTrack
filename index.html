@@ -12,6 +12,10 @@
         content="NumTrack ist eine einfache und moderne Counter-Tracking-App, mit der Sie mühelos Zähler erstellen, verwalten und anpassen können. Erstellen, erhöhen oder verringern Sie Counter ganz einfach. Bleiben Sie organisiert und behalten Sie wichtige Zahlen im Auge!">
     <meta name="keywords"
         content="counter app, tally counter, zahl tracker, zählen app, task tracker, fortschritt tracker, NumTrack, digital counter, simple counter app, productivity tool, count manager">
+    <!-- PWA support -->
+    <meta name="theme-color" content="#ff0000">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
 </head>
 
 <body>
@@ -74,7 +78,7 @@
         </main>
         <!-- Footer -->
         <footer>
-            <span>&copy;2025 Felix Wrba</span>
+            <span>&copy;2025{{(new Date().getYear()>2025)?`-${new Date().getYear()}`:""}} Felix Wrba</span>
             <h2>Einstellungen</h2>
             <div id="font-controller">
                 <label for="font-control">Schriftgröße: </span>
@@ -127,13 +131,25 @@
                     }
                 },
                 rename(counter) {
-                    const input = window.prompt("Gebe einen neuen Namen ein: ").trim()
-                    if(this.counters.filter(counter => counter.name === input)[0]) {
-                        alert(`Counter "${input}" existiert bereits! Versuche es mit einem anderen Namen.`)
-                        return false
+                    let input = window.prompt("Gebe einen neuen Namen ein: ", counter.name)
+                    // If user closes prompt return early
+                    if (!input) {
+                        return
                     }
+                    input = input.trim()
+                    // Check if input empty
                     if (input === "") {
                         alert("Das Eingabefeld darf nicht leer sein.")
+                        return
+                    }
+                    // Check if user kept name
+                    if (input === counter.name) {
+                        return
+                    }
+                    // Check if counter already exists
+                    if (this.counters.filter(counter => counter.name === input)[0]) {
+                        alert(`Counter "${input}" existiert bereits! Versuche es mit einem anderen Namen.`)
+                        return
                     }
                     counter.name = input
                 },
@@ -156,6 +172,13 @@
             }
         })
         app.mount("#app")
+    </script>
+
+    <!-- Register service worker -->
+    <script>
+        if("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("./sw.js").then(reg => console.log("Service Worker registrated."))
+        }
     </script>
 </body>
 

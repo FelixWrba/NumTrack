@@ -11,6 +11,7 @@
 
 * {
     transition: font-size .2s linear;
+    -webkit-tap-highlight-color: transparent;
 }
 
 body {
@@ -28,7 +29,7 @@ header {
     border-bottom: 1px solid #ddd;
     font-size: 1.2em;
     font-weight: bold;
-    color: rgb(255, 0, 0);
+    color: #ff0000;
 }
 
 main {
