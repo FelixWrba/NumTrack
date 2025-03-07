@@ -32,7 +32,9 @@ header {
 }
 
 main {
+    box-sizing: border-box;
     min-height: 100vh;
+    padding-bottom: 20px;
 }
 
 footer {
@@ -42,31 +44,18 @@ footer {
     position: relative;
 }
 
-button,
-input {
-    background-color: transparent;
-    border: 1px solid #ffa5a5;
-    border-radius: 1000px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: 1em;
-}
-
-input:focus {
-    outline: none;
-}
-
 .counter-list {
     list-style-type: none;
     padding: 16px;
     margin: 0;
+    max-width: 600px;
+    margin: auto;
 }
 
 .empty-list {
     display: block;
     padding: 16px;
+    margin-top: -32px;
 }
 
 .counter {
@@ -88,8 +77,33 @@ input:focus {
     margin-right: 12px;
 }
 
+.counter svg {
+    margin: auto;
+    height: var(--default-scale);
+}
+
+.counter button {
+    background-color: transparent;
+    border-radius: .5em;
+    border: none;
+    cursor: pointer;
+    width: calc(var(--default-scale) * 1.5);
+    height: calc(var(--default-scale) * 1.5);
+    display: inline-flex;
+    padding: 0;
+    transition: background-color .3s ease;
+}
+
+.counter button:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
 .counter__control {
     flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 1.2em;
 }
 
 .counter-form {
@@ -111,4 +125,46 @@ input:focus {
 
 #font-control {
     accent-color: #727272;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+    transition: all .5s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+    opacity: 0;
+    transform: translateY(-10px);
+}
+
+.fade-leave-active {
+    position: absolute;
+    width: calc(100% - 40px);
+}
+
+.text-field {
+    background-color: transparent;
+    border: 1px solid #ffb0b0;
+    border-radius: 4px;
+    padding: 4px;
+    font-size: .8em;
+    outline-color: #ffb0b0;
+    font-family: inherit;
+    margin: 0 8px;
+}
+
+.btn {
+    background-color: #ffd1d1;
+    border: 1px solid #ffb0b0;
+    border-radius: 4px;
+    padding: 4px 12px;
+    font-size: .8em;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color .3s ease;
+}
+
+.btn:hover {
+    background-color: #ffc1c1;
 }
