@@ -128,6 +128,10 @@
                 },
                 rename(counter) {
                     const input = window.prompt("Gebe einen neuen Namen ein: ").trim()
+                    if(this.counters.filter(counter => counter.name === input)[0]) {
+                        alert(`Counter "${input}" existiert bereits! Versuche es mit einem anderen Namen.`)
+                        return false
+                    }
                     if (input === "") {
                         alert("Das Eingabefeld darf nicht leer sein.")
                     }

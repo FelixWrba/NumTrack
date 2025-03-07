@@ -140,7 +140,7 @@ footer {
 
 .fade-leave-active {
     position: absolute;
-    width: calc(100% - 40px);
+    width: 592px;
 }
 
 .text-field {
