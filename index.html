@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NumTrack</title>
+    <title>NumTrack - Tracke Zahlen mit Countern</title>
     <!-- CSS -->
     <link rel="stylesheet" href="./css/global.css">
     <!-- SEO -->
@@ -21,12 +21,14 @@
 <body>
     <noscript>Sie müssen JavaScript aktivieren um diese App auszuführen.</noscript>
     <!-- Vue.js from "https://unpkg.com/vue@3/dist/vue.global.js" -->
-    <script src="./assets/vue.global.js"></script>
+    <script src="./assets/vue.global.prod.js"></script>
 
     <!-- App -->
     <div id="app">
         <!-- Header -->
-        <header>NumTrack</header>
+        <header>
+            <h1>NumTrack</h1>
+        </header>
         <main>
             <!-- list of counters -->
             <transition-group name="fade" class="counter-list" tag="ul">
@@ -75,14 +77,22 @@
                     title="Name des Counters eingeben" class="text-field">
                 <button type="submit" class="btn">Hinzufügen</button>
             </form>
+            <div class="info">
+                <h2>Was ist NumTrack?</h2>
+                <p>NumTrack ist eine einfache und moderne Counter-Tracking-App, mit der Sie mühelos Zähler erstellen,
+                    verwalten und anpassen können. Erstellen, erhöhen oder verringern Sie Counter ganz einfach. Bleiben
+                    Sie organisiert und behalten Sie wichtige Zahlen im Auge!</p>
+            </div>
         </main>
         <!-- Footer -->
-        <footer>
-            <span>&copy;2025{{(new Date().getYear()>2025)?`-${new Date().getYear()}`:""}} Felix Wrba</span>
-            <h2>Einstellungen</h2>
+        <footer ref="footer">
+            <img src="./assets/icons/256.png" alt="Icon von NumTrack">
+            <span>&copy;2025{{(new Date().getFullYear()>2025)?`-${new Date().getFullYear()}`:""}} Felix Wrba</span>
+            <a href="/imprint.html">Impressum</a>
+            <button class="link" @click="resetApp">App zurücksetzen</button>
             <div id="font-controller">
-                <label for="font-control">Schriftgröße: </span>
-                    <input type="range" id="font-control" v-model="fontSize" min="8" max="32">
+                <input type="range" id="font-control" v-model="fontSize" min="8" max="32">
+                <label for="font-control">Schriftgröße</span>
             </div>
         </footer>
     </div>
@@ -153,6 +163,16 @@
                     }
                     counter.name = input
                 },
+                resetApp() {
+                    const choice = window.confirm("Willst du wirklich alle gespeicherten Daten löschen? Die Änderungen könnn nicht rückgängig gemacht werden.")
+                    if (choice) {
+                        localStorage.clear()
+                        alert("App wurde zurückgesetzt")
+                    }
+                    else {
+                        alert("App wurde NICHT zurückgesetzt.")
+                    }
+                }
             },
             watch: {
                 // sync counters with localStorage
@@ -163,6 +183,7 @@
                     deep: true,
                 },
                 fontSize(newSize) {
+                    this.$refs["footer"].scrollIntoView()
                     localStorage.setItem("fontSize", newSize.toString())
                     document.body.style.setProperty("--default-scale", newSize + "px")
                 }
@@ -176,7 +197,7 @@
 
     <!-- Register service worker -->
     <script>
-        if("serviceWorker" in navigator) {
+        if ("serviceWorker" in navigator) {
             navigator.serviceWorker.register("./sw.js").then(reg => console.log("Service Worker registrated."))
         }
     </script>
